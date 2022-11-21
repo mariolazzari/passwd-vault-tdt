@@ -1,6 +1,12 @@
 import pino from "pino";
-import pretty from "pino-pretty";
 
-const logger = pino(pretty({ ignore: "pid, hostname" }));
+const logger = pino({
+  transport: {
+    target: "pino-pretty",
+    options: {
+      ignore: "hostname,pid",
+    },
+  },
+});
 
 export default logger;
