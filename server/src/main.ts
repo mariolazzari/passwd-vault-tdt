@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import createServer from "./utils/createServer";
-import { connectToDb, disconnectFromDB } from "./utils/db";
+import { connectToDB, disconnectFromDB } from "./utils/db";
 import logger from "./utils/logger";
 
 function gracefulShutdown(signal: string, app: FastifyInstance) {
@@ -28,17 +28,18 @@ async function main() {
 
     logger.info(`Server is ready at ${url}`);
 
-    await connectToDb();
+    await connectToDB();
   } catch (e) {
     logger.error(e);
     process.exit(1);
   }
 
+  /*
   const signals = ["SIGTERM", "SIGINT"];
-
   for (let i = 0; i < signals.length; i++) {
     gracefulShutdown(signals[i], app);
   }
+  */
 }
 
 main();
